@@ -80,16 +80,16 @@ class TaskService
 
         try {
             // Check if the task status is being updated to 'Completed'
-            if (isset($data['status']) && $data['status'] === 'Completed') {
+            if (isset($data['new_status']) && $data['new_status'] === 'Completed') {
                 // Automatically unblock tasks that depend on this task
                 $this->unblockDependentTasks($task);
             }
-            if ($task->status !== $data['status']) {
-                $this->logStatusChange($task, $data['status']);
+            if ($task->status !== $data['new_status']) {
+                $this->logStatusChange($task, $data['new_status']);
             }
 
             
-            DB::update("UPDATE tasks SET status = ? WHERE id = ?", [$data['status'], $task->id]);
+            DB::update("UPDATE tasks SET status = ? WHERE id = ?", [$data['new_status'], $task->id]);
             $this->invalidateCache($task->id);
             $this->cacheTask($task);
 

@@ -26,7 +26,7 @@ class StoreTaskRequest extends FormRequest
             'description'=>'nullable|min:10|max:1000', 
             'type'=>'required|in:Bug,Feature,Improvment', 
             'priority'=>'required|in:Low,Medium,High', 
-            'status'=>'required|in:Open,In_Progress,Completed,Blocked', 
+            'status'=>'required|in:Open', 
             'due_date'=>'required|date|after_or_equal:date', 
         ];
     }

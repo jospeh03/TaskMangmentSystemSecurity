@@ -82,7 +82,7 @@ class AttachmentService
                 'file_path' => $path,
                 'file_url' => $url
             ];
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error('Error saving attachment: ' . $e->getMessage());
             return response()->json([
                 'status' => 'error',

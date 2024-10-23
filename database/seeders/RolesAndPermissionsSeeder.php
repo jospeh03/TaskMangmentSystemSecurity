@@ -25,6 +25,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'assign user',
             'reassign user',
             'filter tasks',
+            'add dependency',
+            'remove dependency',
             'filter blocked dependices',
             'manage users',
             'generate reports',
@@ -36,6 +38,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'update attachments',
             'view attachments',
             'delete attachments',
+            'restore task',
         ];
 
         foreach ($permissions as $permission) {
@@ -57,6 +60,13 @@ class RolesAndPermissionsSeeder extends Seeder
             'generate reports',
             'view comment',
             'view attachments',
+            'force delete task',
+            'add dependency',
+
+            'remove dependency',
+
+            'restore task',
+
         ]);
         $userRole->givePermissionTo(['view tasks',
             'edit tasks',

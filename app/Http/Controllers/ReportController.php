@@ -2,9 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Services\ReportService;
-use App\Jobs\GenerateReportJob;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Jobs\GenerateReportJob;
 
 class ReportController extends Controller
 {
@@ -21,21 +21,22 @@ class ReportController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
+    
     public function generateTaskReport(Request $request)
-{
-    $user = auth()->user();
+    {
+        $user = auth()->user();  // The authenticated user requesting the report
 
-    // Get filter options from the request
-    $filters = $request->all();
+        // Get filter options from the request
+        $filters = $request->all();
 
-    // Dispatch the report generation job
-    GenerateTaskReportJob::dispatch($user, $filters);
+        // Dispatch the report generation job
+        GenerateTaskReportJob::dispatch($user, $filters);
 
-    return response()->json([
-        'status' => 'success',
-        'message' => 'The report is being generated and will be sent to your email.'
-    ], 200);
-}
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The report is being generated and will be sent to your email.'
+        ], 200);
+    }
 
 
     /**

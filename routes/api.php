@@ -28,15 +28,18 @@ Route::get('auth/me', [AuthController::class, 'me'])->middleware('jwt.auth');
 
 // Group of routes protected by JWT auth middleware
 Route::group(['middleware' => ['jwt.auth']], function () {
+        Route::apiResource('tasks', TaskController::class);
+        Route::get('tasks/filter', [TaskController::class, 'filter']);
+        Route::patch('tasks/{task}/status', [TaskController::class, 'updateStatus']);
+        Route::post('tasks/{task}/assign', [TaskController::class, 'assign']);
+        Route::put('tasks/{task}/reassign', [TaskController::class, 'reassign']);
+        Route::post('tasks/{task}/restore', [TaskController::class, 'restore']);
+        Route::delete('tasks/{task}/force-delete', [TaskController::class, 'forceDelete']);
+        Route::post('tasks/{id}/Dependency/add', [TaskController::class, 'addDependency']);
+        Route::post('tasks/{id}/Dependency/remove', [TaskController::class, 'removeDependency']);
     
-    // Task Routes
-    Route::apiResource('tasks', TaskController::class)->except('destroy');
-    Route::get('tasks/filter', [TaskController::class, 'filter']);
-    Route::put('tasks/{task}/status', [TaskController::class, 'updateStatus']);
-    Route::post('tasks/{task}/assign', [TaskController::class, 'assign']);
-    Route::put('tasks/{task}/reassign', [TaskController::class, 'reassign']);
-    Route::post('tasks/{task}/restore', [TaskController::class, 'restore']);
-    Route::delete('tasks/{task}/force-delete', [TaskController::class, 'forceDelete']);
+    
+  
     
     // Comment Routes
     Route::apiResource('tasks.comments',CommentController::class);
